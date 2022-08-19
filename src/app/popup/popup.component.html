@@ -1,0 +1,58 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Create New Record</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+      <form #empform="ngForm" (submit)="saveEmployee(empform.value)">
+        <div class="mb-3">
+            <label for="code">ID</label>
+            <div class="input-group">
+              <input id="code" class="form-control" disabled="disabled" #code="ngModel" ngModel name="code">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="name">Name</label>
+            <div class="input-group">
+              <input id="name" name="name"class="form-control" required minlength="5" #name="ngModel" ngModel>
+            </div>
+            <span *ngIf="name.invalid && name.touched" class="errormessage">Enter Valid Name</span>
+        </div>
+        <div class="mb-3">
+            <label for="age">Age</label>
+            <div class="input-group">
+              <input id="age" class="form-control" required #age="ngModel" ngModel name="age">
+            </div>
+            <span *ngIf="age.invalid && age.touched" class="errormessage">Enter Valid Age</span>
+        </div>
+        <div class="mb-3">
+            <label for="department">Department</label>
+            <div class="input-group">
+              <select class="form-control" name="department" #department="ngModel" ngModel>
+                <option>Engineering</option>
+                <option>HR</option>
+                <option>Admin</option>
+                <option>Finance</option>
+              </select>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="company">Company Name</label>
+            <div class="input-group">
+              <input id="company" class="form-control" required minlength="3" #company="ngModel" ngModel name="company">
+            </div>
+            <span *ngIf="company.invalid && company.touched" class="errormessage">Enter Valid Company Name</span>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary"  [disabled]="empform.invalid" >Save</button>
+          </div>
+      </form>
+    </div>
+    
+  </ng-template>
+  
+  <button ngbTooltip="Create New Record" class="btn btn-primary" (click)="open(content)">Add New</button>
+  
+  <hr>
+  
+  <pre>{{ closeResult }}</pre>
